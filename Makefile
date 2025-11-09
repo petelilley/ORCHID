@@ -7,8 +7,7 @@ NAME = ORCHID
 DESCRIPTION = "Outrageously Repurposed Calculator Human Interface Device"
 COMPRESSED = NO
 
-CFLAGS = -Wall -Wextra -pedantic -Werror  -Oz
-CXXFLAGS = -Wall -Wextra -pedantic -Werror  -Oz
+CFLAGS = -Wall -Wextra -pedantic -Werror -Wno-gnu-binary-literal -Wno-gnu-flexible-array-initializer -Wno-unused-variable -Oz
 
 # ----------------------------
 
