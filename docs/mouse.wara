@@ -19,5 +19,11 @@ usage = ['Generic Desktop', 'Mouse']
             reportFlags = ['relative']
 
             [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Wheel']
+            sizeInBits = 8
+            logicalValueRange = 'maxSignedSizeRange'
+            reportFlags = ['relative']
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
             usageRange = ['Button', 'Button 1', 'Button 2']
             logicalValueRange = [0, 1]
