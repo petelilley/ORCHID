@@ -2,6 +2,7 @@
 usage = ['Generic Desktop', 'Mouse']
 
     [[applicationCollection.inputReport]]
+    id = 1
 
         [[applicationCollection.inputReport.physicalCollection]]
         usage = ['Generic Desktop', 'Pointer']
@@ -27,3 +28,17 @@ usage = ['Generic Desktop', 'Mouse']
             [[applicationCollection.inputReport.physicalCollection.variableItem]]
             usageRange = ['Button', 'Button 1', 'Button 2']
             logicalValueRange = [0, 1]
+
+[[applicationCollection]]
+usage = ['Generic Desktop', 'Keyboard']
+
+    [[applicationCollection.inputReport]]
+    id = 2
+
+        [[applicationCollection.inputReport.variableItem]]
+        usageRange = ['Keyboard/Keypad', 'Keyboard LeftControl', 'Keyboard Right GUI']
+        logicalValueRange = [0, 1]
+
+        [[applicationCollection.inputReport.variableItem]]
+        usageRange = ['Keyboard/Keypad', 'Keyboard a', 'Keyboard Application']
+        logicalValueRange = [0, 101]
