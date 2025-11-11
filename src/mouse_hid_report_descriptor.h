@@ -13,7 +13,7 @@
 // +----------+-------+-------------------+
 // |        1 | Input |                 4 |
 // +----------+-------+-------------------+
-static const uint8_t orchid_mouse_keyboard_hid_report_descriptor[] =
+static const uint8_t orchid_mouse_hid_report_descriptor[] =
 {
     0x05, 0x01,    // UsagePage(Generic Desktop[0x0001])
     0x09, 0x02,    // UsageId(Mouse[0x0002])
@@ -46,11 +46,11 @@ static const uint8_t orchid_mouse_keyboard_hid_report_descriptor[] =
 
 // clang-format on
 
-static const uint8_t orchid_mouse_hid_report_descriptor_id = 1;
+#pragma pack(push, 1)
 
-// input 1
+#define ORCHID_MOUSE_HID_REPORT_DESCRIPTOR_ID (1)
 typedef struct orchid_mouse_hid_report {
-  uint8_t report_id;
+  uint8_t report_id;  // ORCHID_MOUSE_HID_REPORT_DESCRIPTOR_ID
   union {
     uint8_t payload[4];
     struct {
@@ -60,13 +60,7 @@ typedef struct orchid_mouse_hid_report {
       uint8_t buttons;
     };
   };
-} orchid_mouse_hid_report_t;
+} orchid_mouse_hid_report;
 
-static const uint8_t orchid_keyboard_hid_report_descriptor_id = 2;
-
-// input 2
-typedef struct orchid_keyboard_hid_report {
-  uint8_t reportID;
-  // TODO: payload
-} orchid_keyboard_hid_report_t;
+#pragma pack(pop)
 

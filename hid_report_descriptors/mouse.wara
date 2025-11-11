@@ -6,24 +6,28 @@ usage = ['Generic Desktop', 'Mouse']
         [[applicationCollection.inputReport.physicalCollection]]
         usage = ['Generic Desktop', 'Pointer']
 
+            # dx
             [[applicationCollection.inputReport.physicalCollection.variableItem]]
             usage = ['Generic Desktop', 'X']
             sizeInBits = 8
             logicalValueRange = 'maxSignedSizeRange'
             reportFlags = ['relative']
 
+            # dy
             [[applicationCollection.inputReport.physicalCollection.variableItem]]
             usage = ['Generic Desktop', 'Y']
             sizeInBits = 8
             logicalValueRange = 'maxSignedSizeRange'
             reportFlags = ['relative']
 
+            # Wheel
             [[applicationCollection.inputReport.physicalCollection.variableItem]]
             usage = ['Generic Desktop', 'Wheel']
             sizeInBits = 8
             logicalValueRange = 'maxSignedSizeRange'
             reportFlags = ['relative']
 
+            # Left and Right Buttons
             [[applicationCollection.inputReport.physicalCollection.variableItem]]
             usageRange = ['Button', 'Button 1', 'Button 2']
             logicalValueRange = [0, 1]

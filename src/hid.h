@@ -3,7 +3,8 @@
 #include <stdbool.h>
 
 typedef enum {
-  ORCHID_KEYBOARD_MOUSE,
+  ORCHID_MOUSE,
+  ORCHID_KEYBOARD,
   // TODO: Game controller?
 } orchid_hid_device_type_t;
 

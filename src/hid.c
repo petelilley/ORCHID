@@ -1,5 +1,7 @@
 #include "hid.h"
-#include "keyboard_mouse_hid_report_descriptor.h"
+#include "keyboard_hid_report_descriptor.h"
+#include "mouse_hid_report_descriptor.h"
+#include "macros.h"
 #include <usbdrvce.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -56,8 +58,10 @@ static bool is_get_descriptor_hid_request(usb_control_setup_t* setup_event_data)
 
 static void* get_report_descriptor_data(void) {
   switch (s_device_type) {
-    case ORCHID_KEYBOARD_MOUSE:
-      return (void*)orchid_mouse_keyboard_hid_report_descriptor;
+    case ORCHID_MOUSE:
+      return (void*)orchid_mouse_hid_report_descriptor;
+    case ORCHID_KEYBOARD:
+      return (void*)orchid_keyboard_hid_report_descriptor;
     default:
       return NULL;
   }
@@ -65,8 +69,21 @@ static void* get_report_descriptor_data(void) {
 
 static uint16_t get_report_descriptor_length(void) {
   switch (s_device_type) {
-    case ORCHID_KEYBOARD_MOUSE:
-      return sizeof(orchid_mouse_keyboard_hid_report_descriptor);
+    case ORCHID_MOUSE:
+      return sizeof(orchid_mouse_hid_report_descriptor);
+    case ORCHID_KEYBOARD:
+      return sizeof(orchid_keyboard_hid_report_descriptor);
+    default:
+      return 0;
+  }
+}
+
+static uint16_t get_max_packet_size(void) {
+  switch (s_device_type) {
+    case ORCHID_MOUSE:
+      return sizeof(orchid_mouse_hid_report_t);
+    case ORCHID_KEYBOARD:
+      return sizeof(orchid_keyboard_hid_report_t);
     default:
       return 0;
   }
@@ -157,7 +174,7 @@ static usb_configuration_descriptor_t* init_configuration_descriptor(void) {
                               .bDescriptorType = USB_ENDPOINT_DESCRIPTOR,
                               .bEndpointAddress = USB_DEVICE_TO_HOST | 1,
                               .bmAttributes = USB_INTERRUPT_TRANSFER,
-                              .wMaxPacketSize = sizeof(orchid_mouse_hid_report_t),  // TODO:
+                              .wMaxPacketSize = 0,  // TEMPORARY
                               .bInterval = 1,
                           },
                   },
@@ -165,6 +182,7 @@ static usb_configuration_descriptor_t* init_configuration_descriptor(void) {
   };
 
   configuration1.interface0.hid.wDescriptorLength = get_report_descriptor_length();
+  configuration1.interface0.endpoints[0].wMaxPacketSize = get_max_packet_size();
   return &configuration1.configuration;
 }
 
@@ -238,7 +256,7 @@ void orchid_hid_handle_events(void) {
 }
 
 int orchid_hid_send_mouse_input(const orchid_mouse_hid_report_t* report) {
-  if (!s_is_usb_connected)
+  if (!s_is_usb_connected || s_device_type != ORCHID_MOUSE)
     return USB_SUCCESS;
 
   usb_error_t result =
@@ -252,11 +270,16 @@ int orchid_hid_send_mouse_input(const orchid_mouse_hid_report_t* report) {
 }
 
 int orchid_hid_send_keyboard_input(const orchid_keyboard_hid_report_t* report) {
-  if (!s_is_usb_connected)
+  if (!s_is_usb_connected || s_device_type != ORCHID_KEYBOARD)
     return USB_SUCCESS;
 
-  (void)report;
-  // TODO:
-  return USB_SUCCESS;
+  usb_error_t result =
+      usb_ScheduleInterruptTransfer(usb_GetDeviceEndpoint(s_active_usb_device, 0x81), (void*)report,
+                                    sizeof(orchid_keyboard_hid_report_t), NULL, NULL);
+  if (result == USB_ERROR_NO_DEVICE) {
+    s_is_usb_connected = false;
+  }
+
+  return result;
 }
 

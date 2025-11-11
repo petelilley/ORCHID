@@ -1,0 +1,16 @@
+# Standard 6-key rollover keyboard
+[[applicationCollection]]
+usage = ['Generic Desktop', 'Keyboard']
+
+    [[applicationCollection.inputReport]]
+    id = 2
+
+        # Modifier keys
+        [[applicationCollection.inputReport.variableItem]]
+        usageRange = ['Keyboard/Keypad', 'Keyboard LeftControl', 'Keyboard Right GUI']
+        logicalValueRange = [0, 1]
+
+        # 7 key codes
+        [[applicationCollection.inputReport.arrayItem]]
+        usageRange = ['Keyboard/Keypad', 'ErrorRollOver', 'Keyboard Application']
+        count = 7
