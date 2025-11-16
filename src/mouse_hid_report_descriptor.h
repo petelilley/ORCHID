@@ -60,7 +60,7 @@ typedef struct orchid_mouse_hid_report {
       uint8_t buttons;
     };
   };
-} orchid_mouse_hid_report;
+} orchid_mouse_hid_report_t;
 
 #pragma pack(pop)
 
