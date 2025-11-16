@@ -39,22 +39,21 @@ static const uint8_t orchid_keyboard_hid_report_descriptor[] =
     0xC0,                // EndCollection()
 };
 
-// clang-format off
+// clang-format on
 
-#pragma pack(push,1)
+#pragma pack(push, 1)
 
 #define ORCHID_KEYBOARD_HID_REPORT_DESCRIPTOR_ID (2)
-typedef struct orchid_keyboard_hid_report
-{
-    uint8_t report_id; // ORCHID_KEYBOARD_HID_REPORT_DESCRIPTOR_ID;
-    union {
-      uint8_t payload[8];
-      struct {
-        uint8_t modifiers;
-        uint8_t reserved;
-        uint8_t keycodes[6];
-      };
+typedef struct orchid_keyboard_hid_report {
+  uint8_t report_id;  // ORCHID_KEYBOARD_HID_REPORT_DESCRIPTOR_ID
+  union {
+    uint8_t payload[8];
+    struct {
+      uint8_t modifiers;
+      uint8_t reserved;
+      uint8_t keycodes[6];
     };
+  };
 } orchid_keyboard_hid_report_t;
 
 #pragma pack(pop)
