@@ -1,0 +1,18 @@
+#
+# A gamepad with 49 buttons (one for each on the calculator, except ON)
+#
+
+[[applicationCollection]]
+usage = ['Generic Desktop', 'Gamepad']
+
+    [[applicationCollection.inputReport]]
+
+        # 49 buttons
+        [[applicationCollection.inputReport.variableItem]]
+        usageRange = ['Button', 'Button 1', 'Button 49']
+        logicalValueRange = [0, 1]
+
+        # 7 Padding bits
+        [[applicationCollection.inputReport.paddingItem]]
+        sizeInBits = 7
+

@@ -1,7 +1,12 @@
+#
+# 2-button mouse with scroll wheel
+#
+
 [[applicationCollection]]
 usage = ['Generic Desktop', 'Mouse']
 
     [[applicationCollection.inputReport]]
+    id = 1
 
         [[applicationCollection.inputReport.physicalCollection]]
         usage = ['Generic Desktop', 'Pointer']
