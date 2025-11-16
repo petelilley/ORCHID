@@ -15,28 +15,28 @@
 // +----------+-------+-------------------+
 static const uint8_t orchid_keyboard_hid_report_descriptor[] =
 {
-    0x05, 0x01,    // UsagePage(Generic Desktop[0x0001])
-    0x09, 0x06,    // UsageId(Keyboard[0x0006])
-    0xA1, 0x01,    // Collection(Application)
-    0x85, 0x02,    //     ReportId(2)
-    0x05, 0x07,    //     UsagePage(Keyboard/Keypad[0x0007])
-    0x19, 0xE0,    //     UsageIdMin(Keyboard LeftControl[0x00E0])
-    0x29, 0xE7,    //     UsageIdMax(Keyboard Right GUI[0x00E7])
-    0x15, 0x00,    //     LogicalMinimum(0)
-    0x25, 0x01,    //     LogicalMaximum(1)
-    0x95, 0x08,    //     ReportCount(8)
-    0x75, 0x01,    //     ReportSize(1)
-    0x81, 0x02,    //     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
-    0x19, 0x01,    //     UsageIdMin(ErrorRollOver[0x0001])
-    0x29, 0x65,    //     UsageIdMax(Keyboard Application[0x0065])
-    0x15, 0x01,    //     LogicalMinimum(1)
-    0x25, 0x65,    //     LogicalMaximum(101)
-    0x95, 0x07,    //     ReportCount(7)
-    0x75, 0x07,    //     ReportSize(7)
-    0x81, 0x00,    //     Input(Data, Array, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
-    0x95, 0x01,    //     ReportCount(1)
-    0x81, 0x03,    //     Input(Constant, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
-    0xC0,          // EndCollection()
+    0x05, 0x01,          // UsagePage(Generic Desktop[0x0001])
+    0x09, 0x06,          // UsageId(Keyboard[0x0006])
+    0xA1, 0x01,          // Collection(Application)
+    0x85, 0x02,          //     ReportId(2)
+    0x05, 0x07,          //     UsagePage(Keyboard/Keypad[0x0007])
+    0x19, 0xE0,          //     UsageIdMin(Keyboard LeftControl[0x00E0])
+    0x29, 0xE7,          //     UsageIdMax(Keyboard Right GUI[0x00E7])
+    0x15, 0x00,          //     LogicalMinimum(0)
+    0x25, 0x01,          //     LogicalMaximum(1)
+    0x95, 0x08,          //     ReportCount(8)
+    0x75, 0x01,          //     ReportSize(1)
+    0x81, 0x02,          //     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+    0x95, 0x01,          //     ReportCount(1)
+    0x75, 0x08,          //     ReportSize(8)
+    0x81, 0x03,          //     Input(Constant, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+    0x19, 0x01,          //     UsageIdMin(ErrorRollOver[0x0001])
+    0x29, 0x81,          //     UsageIdMax(Keyboard Volume Down[0x0081])
+    0x15, 0x01,          //     LogicalMinimum(1)
+    0x26, 0x81, 0x00,    //     LogicalMaximum(129)
+    0x95, 0x06,          //     ReportCount(6)
+    0x81, 0x00,          //     Input(Data, Array, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+    0xC0,                // EndCollection()
 };
 
 // clang-format off
@@ -51,7 +51,8 @@ typedef struct orchid_keyboard_hid_report
       uint8_t payload[8];
       struct {
         uint8_t modifiers;
-        uint8_t keycodes[7];
+        uint8_t reserved;
+        uint8_t keycodes[6];
       };
     };
 } orchid_keyboard_hid_report_t;

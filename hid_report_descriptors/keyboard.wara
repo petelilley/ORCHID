@@ -1,4 +1,7 @@
+#
 # Standard 6-key rollover keyboard
+#
+
 [[applicationCollection]]
 usage = ['Generic Desktop', 'Keyboard']
 
@@ -10,7 +13,12 @@ usage = ['Generic Desktop', 'Keyboard']
         usageRange = ['Keyboard/Keypad', 'Keyboard LeftControl', 'Keyboard Right GUI']
         logicalValueRange = [0, 1]
 
-        # 7 key codes
+        # Padding byte
+        [[applicationCollection.inputReport.paddingItem]]
+        sizeInBits = 8
+
+        # Regular Buttons
         [[applicationCollection.inputReport.arrayItem]]
-        usageRange = ['Keyboard/Keypad', 'ErrorRollOver', 'Keyboard Application']
-        count = 7
+        usageRange = ['Keyboard/Keypad', 'ErrorRollOver', 'Keyboard Volume Down'] # We don't actually need all these keys, but just say we do so Waratah gives us 8 bits
+        count = 6
+
